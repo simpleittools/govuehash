@@ -26,7 +26,7 @@ func main() {
 	}))
 
 	var examplePassword string
-	var resultingPassword string
+	var resultingHash string
 
 	// POST route for posting the example ot the hashing algorithm
 	app.Post("/api/hashing", func(c *fiber.Ctx) error {
@@ -37,15 +37,14 @@ func main() {
 		if err != nil {
 			return err
 		}
-		resultingPassword = hashedPassword
+		resultingHash = hashedPassword
 
-		//fmt.Printf("Your original password was " + examplePassword + "Your resulting password is " + resultingPassword)
+		//fmt.Printf("Your original password was " + examplePassword + "Your resulting password is " + resultingHash)
 		return c.JSON(hashedPassword)
 
 	})
 	// GET route to display the result from the hashing algorithm
 	app.Get("/api/result", func(c *fiber.Ctx) error {
-		resultingHash := resultingPassword
 		return c.SendString(resultingHash)
 	})
 
